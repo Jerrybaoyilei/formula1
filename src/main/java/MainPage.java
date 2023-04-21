@@ -388,7 +388,138 @@ public class MainPage extends JFrame {
         buttonLapTime.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Read the selected items into variables.
+                String season = String.valueOf(comboBoxSeason.getSelectedItem());
+                String race = (String) comboBoxRace.getSelectedItem();
+                String driver = (String) comboBoxDriver.getSelectedItem();
 
+                // Remove current stuff in the panelResults;
+                panelResults.removeAll();
+
+                if (season.equals("--")) {
+                    if (race.equals("--")) {
+                        // Case 1: Not enough information provided. Show warning.
+                        labelWarning.setText("Select at least two from Season, Race, or Driver to obtain Lap Time results");
+                    }
+                    else {
+                        // Case 2: user provided race and driver. Show all lap times for this Grand Prix and driver over
+                        //          years. Order by years DESC then laps.
+                        if (!driver.equals("--")) {
+                            String[] nameParts = driver.split(",");
+                            String lastName = nameParts[0].trim();
+                            String firstName = nameParts[1].trim();
+                            ResultSet resultSet = runProcedure(race, firstName, lastName, "check_laps_race_driver(?, ?, ?)");
+                            setUpResults(String.format("Lap Times for %s %s in %s", firstName, lastName, race), resultSet);
+                        }
+                    }
+                }
+                else {
+                    if (race.equals("--")) {
+                        // Case 3: Not enough information provided. Show warning.
+                        if (driver.equals("--")) {
+                            labelWarning.setText("Select at least two from Season, Race, or Driver to obtain Lap Time results");
+                        }
+                        // Case 4: user provided season and driver. Show all lap times in all races in this season for
+                        //          this driver. Order by race rounds then laps.
+                        else {
+                            String[] nameParts = driver.split(",");
+                            String lastName = nameParts[0].trim();
+                            String firstName = nameParts[1].trim();
+                            ResultSet resultSet = runProcedure(season, firstName, lastName, "check_laps_season_driver(?, ?, ?)");
+                            setUpResults(String.format("Lap Times for %s %s in %s", firstName, lastName, season), resultSet);
+                        }
+                    }
+                    else {
+                        // Case 5: user provided season and race. Show lap times for all drivers in this season in this
+                        //          race. Order by lap then by order in the lap.
+                        if (driver.equals("--")) {
+                            ResultSet resultSet = runProcedure(season, race, "check_laps_season_race(?, ?)");
+                            setUpResults(String.format("Lap Times in %s %s", season, race), resultSet);
+                        }
+                        // Case 6: user provided season, race and driver. Show lap times for this driver in this season
+                        //          in this race. Order by lap.
+                        else {
+                            String[] nameParts = driver.split(",");
+                            String lastName = nameParts[0].trim();
+                            String firstName = nameParts[1].trim();
+                            ResultSet resultSet = runProcedure(season, race, firstName, lastName, "check_laps_season_race_driver(?, ?, ?, ?)");
+                            setUpResults(String.format("Lap Times for %s %s in %s %s", firstName, lastName, season, race), resultSet);
+                        }
+                    }
+                }
+
+                // Repaint the panelResults to update it with the corresponding result tables.
+                panelResults.revalidate();
+                panelResults.repaint();
+            }
+        });
+
+        buttonPitStop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Read the selected items into variables.
+                String season = String.valueOf(comboBoxSeason.getSelectedItem());
+                String race = (String) comboBoxRace.getSelectedItem();
+                String driver = (String) comboBoxDriver.getSelectedItem();
+
+                // Remove current stuff in the panelResults;
+                panelResults.removeAll();
+
+                if (season.equals("--")) {
+                    if (race.equals("--")) {
+                        // Case 1: Not enough information provided. Show warning.
+                        labelWarning.setText("Select at least two from Season, Race, or Driver to obtain Pit Stop results");
+                    }
+                    else {
+                        // Case 2: user provided race and driver. Show all lap times for this Grand Prix and driver over
+                        //          years. Order by years DESC then laps.
+                        if (!driver.equals("--")) {
+                            String[] nameParts = driver.split(",");
+                            String lastName = nameParts[0].trim();
+                            String firstName = nameParts[1].trim();
+                            ResultSet resultSet = runProcedure(race, firstName, lastName, "check_pit_stop_race_driver(?, ?, ?)");
+                            setUpResults(String.format("Pit Stops for %s %s in %s", firstName, lastName, race), resultSet);
+                        }
+                    }
+                }
+                else {
+                    if (race.equals("--")) {
+                        // Case 3: Not enough information provided. Show warning.
+                        if (driver.equals("--")) {
+                            labelWarning.setText("Select at least two from Season, Race, or Driver to obtain Pit Stop results");
+                        }
+                        // Case 4: user provided season and driver. Show all lap times in all races in this season for
+                        //          this driver. Order by race rounds then laps.
+                        else {
+                            String[] nameParts = driver.split(",");
+                            String lastName = nameParts[0].trim();
+                            String firstName = nameParts[1].trim();
+                            ResultSet resultSet = runProcedure(season, firstName, lastName, "check_pit_stop_season_driver(?, ?, ?)");
+                            setUpResults(String.format("Pit Stops for %s %s in %s", firstName, lastName, season), resultSet);
+                        }
+                    }
+                    else {
+                        // Case 5: user provided season and race. Show lap times for all drivers in this season in this
+                        //          race. Order by lap then by order in the lap.
+                        if (driver.equals("--")) {
+                            ResultSet resultSet = runProcedure(season, race, "check_pit_stop_season_race(?, ?)");
+                            setUpResults(String.format("Pit Stops in %s %s", season, race), resultSet);
+                        }
+                        // Case 6: user provided season, race and driver. Show lap times for this driver in this season
+                        //          in this race. Order by lap.
+                        else {
+                            String[] nameParts = driver.split(",");
+                            String lastName = nameParts[0].trim();
+                            String firstName = nameParts[1].trim();
+                            ResultSet resultSet = runProcedure(season, race, firstName, lastName, "check_pit_stop_season_race_driver(?, ?, ?, ?)");
+                            setUpResults(String.format("Pit Stops for %s %s in %s %s", firstName, lastName, season, race), resultSet);
+                        }
+                    }
+                }
+
+                // Repaint the panelResults to update it with the corresponding result tables.
+                panelResults.revalidate();
+                panelResults.repaint();
             }
         });
     }

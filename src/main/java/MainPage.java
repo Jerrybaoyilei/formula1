@@ -36,6 +36,8 @@ public class MainPage extends JFrame {
     private JLabel labelWarning;
     private JComboBox comboBoxConstructor;
     private JLabel labelConstructor;
+    private JButton buttonFavConstructor;
+    private JButton buttonFavDriver;
 
     public MainPage(Connection connection, String email) {
         this.connection = connection;
@@ -249,8 +251,7 @@ public class MainPage extends JFrame {
                                 ResultSet rsDriver = runProcedure(firstName, lastName, "check_race_d_driver(?, ?)");
                                 setUpResults(String.format("All Race Results for %s %s", firstName, lastName), rsDriver);
                             }
-                        }
-                        else {
+                        } else {
                             // Case 3: user provided constructor. Show constructor race results for this constructor.
                             //          Order by year DESC and race round.
                             if (driver.equals("--")) {
@@ -264,8 +265,7 @@ public class MainPage extends JFrame {
                                 labelWarning.setText("Error! Cannot select both constructor and driver when checking Race results");
                             }
                         }
-                    }
-                    else {
+                    } else {
                         if (constructor.equals("--")) {
                             // Case 5: user provided race. Show race results for all constructors and drivers in this
                             //          specific Grand Prix. Order by year DESC then position.
@@ -284,8 +284,7 @@ public class MainPage extends JFrame {
                                 ResultSet rsDriver = runProcedure(race, firstName, lastName, "check_race_d_race_driver(?, ?, ?)");
                                 setUpResults(String.format("All Race Results for %s %s in %s", firstName, lastName, race), rsDriver);
                             }
-                        }
-                        else {
+                        } else {
                             // Case 7: user provided both race and constructor. Show race results for this constructor
                             //          in this Grand Prix over the years. Order by year DESC.
                             if (driver.equals("--")) {
@@ -298,8 +297,7 @@ public class MainPage extends JFrame {
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     if (race.equals("--")) {
                         if (constructor.equals("--")) {
                             // Case 9: user provided season. Show all race results of all races in this season for both
@@ -324,8 +322,7 @@ public class MainPage extends JFrame {
                                 ResultSet rsDriver = runProcedure(season, firstName, lastName, "check_race_d_season_driver(?, ?, ?)");
                                 setUpResults(String.format("Driver Results for %s %s in %s", firstName, lastName, season), rsDriver);
                             }
-                        }
-                        else {
+                        } else {
                             // Case 11: user provided season and constructor. Show all race results for this constructor
                             //          in this season. Include results for the drivers driving for this constructor.
                             //          Order by race rounds.
@@ -340,8 +337,7 @@ public class MainPage extends JFrame {
                                 labelWarning.setText("Error! Cannot select both constructor and driver when checking Race results");
                             }
                         }
-                    }
-                    else {
+                    } else {
                         if (constructor.equals("--")) {
                             // Case 13: user provided season and race. Show race results for all drivers and
                             //          constructors in this race. Order by race final orders.
@@ -360,8 +356,7 @@ public class MainPage extends JFrame {
                                 ResultSet rsDriver = runProcedure(season, race, firstName, lastName, "check_race_d_season_race_driver(?, ?, ?, ?)");
                                 setUpResults(String.format("Race Result for %s %s in %s %s", firstName, lastName, season, race), rsDriver);
                             }
-                        }
-                        else {
+                        } else {
                             // Case 15: user provided season, race, and constructor. Show race results for this
                             //          constructor in this Grand PRix in this year. Also show the race results for
                             //          drivers driving for this constructor.
@@ -400,8 +395,7 @@ public class MainPage extends JFrame {
                     if (race.equals("--")) {
                         // Case 1: Not enough information provided. Show warning.
                         labelWarning.setText("Select at least two from Season, Race, or Driver to obtain Lap Time results");
-                    }
-                    else {
+                    } else {
                         // Case 2: user provided race and driver. Show all lap times for this Grand Prix and driver over
                         //          years. Order by years DESC then laps.
                         if (!driver.equals("--")) {
@@ -412,8 +406,7 @@ public class MainPage extends JFrame {
                             setUpResults(String.format("Lap Times for %s %s in %s", firstName, lastName, race), resultSet);
                         }
                     }
-                }
-                else {
+                } else {
                     if (race.equals("--")) {
                         // Case 3: Not enough information provided. Show warning.
                         if (driver.equals("--")) {
@@ -428,8 +421,7 @@ public class MainPage extends JFrame {
                             ResultSet resultSet = runProcedure(season, firstName, lastName, "check_laps_season_driver(?, ?, ?)");
                             setUpResults(String.format("Lap Times for %s %s in %s", firstName, lastName, season), resultSet);
                         }
-                    }
-                    else {
+                    } else {
                         // Case 5: user provided season and race. Show lap times for all drivers in this season in this
                         //          race. Order by lap then by order in the lap.
                         if (driver.equals("--")) {
@@ -469,8 +461,7 @@ public class MainPage extends JFrame {
                     if (race.equals("--")) {
                         // Case 1: Not enough information provided. Show warning.
                         labelWarning.setText("Select at least two from Season, Race, or Driver to obtain Pit Stop results");
-                    }
-                    else {
+                    } else {
                         // Case 2: user provided race and driver. Show all lap times for this Grand Prix and driver over
                         //          years. Order by years DESC then laps.
                         if (!driver.equals("--")) {
@@ -481,8 +472,7 @@ public class MainPage extends JFrame {
                             setUpResults(String.format("Pit Stops for %s %s in %s", firstName, lastName, race), resultSet);
                         }
                     }
-                }
-                else {
+                } else {
                     if (race.equals("--")) {
                         // Case 3: Not enough information provided. Show warning.
                         if (driver.equals("--")) {
@@ -497,8 +487,7 @@ public class MainPage extends JFrame {
                             ResultSet resultSet = runProcedure(season, firstName, lastName, "check_pit_stop_season_driver(?, ?, ?)");
                             setUpResults(String.format("Pit Stops for %s %s in %s", firstName, lastName, season), resultSet);
                         }
-                    }
-                    else {
+                    } else {
                         // Case 5: user provided season and race. Show lap times for all drivers in this season in this
                         //          race. Order by lap then by order in the lap.
                         if (driver.equals("--")) {
@@ -752,8 +741,14 @@ public class MainPage extends JFrame {
         buttonLapTime.setText("Lap Time");
         panelCheckButtons.add(buttonLapTime, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         panelFavButtons = new JPanel();
-        panelFavButtons.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelFavButtons.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         panelMain.add(panelFavButtons, new GridConstraints(7, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        buttonFavConstructor = new JButton();
+        buttonFavConstructor.setText("Favorite Constructor");
+        panelFavButtons.add(buttonFavConstructor, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonFavDriver = new JButton();
+        buttonFavDriver.setText("Favorite Driver");
+        panelFavButtons.add(buttonFavDriver, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         labelCheck = new JLabel();
         labelCheck.setText("Click a button to check out results");
         panelMain.add(labelCheck, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));

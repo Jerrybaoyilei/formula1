@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBLogin extends JFrame {
+public class Formula1DataChecker extends JFrame {
 
     private final JTextField fieldUsername;
     private final JPasswordField fieldPassword;
@@ -30,7 +30,7 @@ public class DBLogin extends JFrame {
     private final int BUTTON_X = (WINDOW_WIDTH) / 2 - LABEL_WIDTH / 2;
     private final int BUTTON_Y = MESSAGE_Y + MESSAGE_HEIGHT + LABEL_HEIGHT;
 
-    public DBLogin() {
+    public Formula1DataChecker() {
 
         // Set up the database login frame.
         this.setTitle("Connect to MySQL Database");
@@ -102,6 +102,6 @@ public class DBLogin extends JFrame {
     }
 
     public static void main(String[] args) {
-        new DBLogin();
+        new Formula1DataChecker();
     }
 }

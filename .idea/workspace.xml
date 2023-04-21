@@ -4,18 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8f95a5a-1c75-4288-8316-a205e3be4a59" name="Changes" comment="Fixed some MySQL procedures for time conversion from milliseconds to hour:minute:seconds:milliseconds.&#10;Added procedures related to sprint races and put them in qualifying checker's button action.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/FavConstructor.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/FavConstructor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/FavDriver.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/FavDriver.java" afterDir="false" />
+    <list default="true" id="e8f95a5a-1c75-4288-8316-a205e3be4a59" name="Changes" comment="Set up button clicks for Favorite Drivers and Favorite Constructors. &#10;Set up these respective windows. &#10;Set up the &quot;more info&quot; button that leads to a Google Doc I wrote to introduce Formula 1.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DBLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Formula1DataChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/F1LoginSignup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/F1LoginSignup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MainPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainPage.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FavConstructor.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FavConstructor.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FavConstructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FavConstructor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FavDriver.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FavDriver.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FavDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FavDriver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +43,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "false",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "223",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
@@ -126,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682091231032</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Set up button clicks for Favorite Drivers and Favorite Constructors. &#10;Set up these respective windows. &#10;Set up the &quot;more info&quot; button that leads to a Google Doc I wrote to introduce Formula 1.">
+      <created>1682110364402</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682110364402</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -151,7 +153,8 @@
     <MESSAGE value="Covered all scenarios for checking Lap Times and Pit Stops." />
     <MESSAGE value="Added buttons to invoke the &quot;favorite driver&quot; and &quot;favorite constructor&quot; windows." />
     <MESSAGE value="Fixed some MySQL procedures for time conversion from milliseconds to hour:minute:seconds:milliseconds.&#10;Added procedures related to sprint races and put them in qualifying checker's button action." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed some MySQL procedures for time conversion from milliseconds to hour:minute:seconds:milliseconds.&#10;Added procedures related to sprint races and put them in qualifying checker's button action." />
+    <MESSAGE value="Set up button clicks for Favorite Drivers and Favorite Constructors. &#10;Set up these respective windows. &#10;Set up the &quot;more info&quot; button that leads to a Google Doc I wrote to introduce Formula 1." />
+    <option name="LAST_COMMIT_MESSAGE" value="Set up button clicks for Favorite Drivers and Favorite Constructors. &#10;Set up these respective windows. &#10;Set up the &quot;more info&quot; button that leads to a Google Doc I wrote to introduce Formula 1." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

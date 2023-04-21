@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8f95a5a-1c75-4288-8316-a205e3be4a59" name="Changes" comment="Finished up user sign up and log in window. &#10;Built up the main window.">
+    <list default="true" id="e8f95a5a-1c75-4288-8316-a205e3be4a59" name="Changes" comment="Finished all combinations for checking qualifying. &#10;Added constructor selections.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MainPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainPage.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +79,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682039528952</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Finished all combinations for checking qualifying. &#10;Added constructor selections.">
+      <created>1682050834778</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682050834778</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -100,7 +106,8 @@
     </ignored-roots>
     <MESSAGE value="Set up the Database login window. Upon successful login with MySQL username and password, it will close the DB Login window and open F1LoginSignup window." />
     <MESSAGE value="Finished up user sign up and log in window. &#10;Built up the main window." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished up user sign up and log in window. &#10;Built up the main window." />
+    <MESSAGE value="Finished all combinations for checking qualifying. &#10;Added constructor selections." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished all combinations for checking qualifying. &#10;Added constructor selections." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

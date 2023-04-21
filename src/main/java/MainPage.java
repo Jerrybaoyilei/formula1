@@ -224,8 +224,170 @@ public class MainPage extends JFrame {
                 // Read the selected items into variables.
                 String season = String.valueOf(comboBoxSeason.getSelectedItem());
                 String race = (String) comboBoxRace.getSelectedItem();
+                String constructor = (String) comboBoxConstructor.getSelectedItem();
                 String driver = (String) comboBoxDriver.getSelectedItem();
 
+                // Remove current stuff in the panelResults;
+                panelResults.removeAll();
+
+                if (season.equals("--")) {
+                    if (race.equals("--")) {
+                        if (constructor.equals("--")) {
+                            // Case 1: user provided no input. Show both full tables for drivers and constructors.
+                            if (driver.equals("--")) {
+                                ResultSet rsDriver = runProcedure("check_race_d");
+                                setUpResults("All Race Results for Drivers", rsDriver);
+                                ResultSet rsConstructor = runProcedure("check_race_c");
+                                setUpResults("All Race Results for Constructors", rsConstructor);
+                            }
+                            // Case 2: user provided driver. Show driver races results for this driver. Order by year
+                            //          DESC and race round.
+                            else {
+                                String[] nameParts = driver.split(",");
+                                String lastName = nameParts[0].trim();
+                                String firstName = nameParts[1].trim();
+                                ResultSet rsDriver = runProcedure(firstName, lastName, "check_race_d_driver(?, ?)");
+                                setUpResults(String.format("All Race Results for %s %s", firstName, lastName), rsDriver);
+                            }
+                        }
+                        else {
+                            // Case 3: user provided constructor. Show constructor race results for this constructor.
+                            //          Order by year DESC and race round.
+                            if (driver.equals("--")) {
+                                ResultSet rsConstructor = runProcedure(constructor, "check_race_c_constructor(?)");
+                                setUpResults(String.format("All Race Results for %s", constructor), rsConstructor);
+                                ResultSet rsDriver = runProcedure(constructor, "check_race_c_constructor_breakdown(?)");
+                                setUpResults(String.format("All Race Results for Drivers Driving for %s", constructor), rsDriver);
+                            }
+                            // Case 4: user provided both constructor and driver. Show no result because there is a conflict.
+                            else {
+                                labelWarning.setText("Error! Cannot select both constructor and driver when checking Race results");
+                            }
+                        }
+                    }
+                    else {
+                        if (constructor.equals("--")) {
+                            // Case 5: user provided race. Show race results for all constructors and drivers in this
+                            //          specific Grand Prix. Order by year DESC then position.
+                            if (driver.equals("--")) {
+                                ResultSet rsDriver = runProcedure(race, "check_race_d_race(?)");
+                                setUpResults(String.format("All Driver Race Results in %s", race), rsDriver);
+                                ResultSet rsConstructor = runProcedure(race, "check_race_c_race(?)");
+                                setUpResults(String.format("All Constructor Race Results in %s", race), rsConstructor);
+                            }
+                            // Case 6: user provided both race and driver. Show race results for this driver in this
+                            //          Grand Prix over the years. Order by year DESC.
+                            else {
+                                String[] nameParts = driver.split(",");
+                                String lastName = nameParts[0].trim();
+                                String firstName = nameParts[1].trim();
+                                ResultSet rsDriver = runProcedure(race, firstName, lastName, "check_race_d_race_driver(?, ?, ?)");
+                                setUpResults(String.format("All Race Results for %s %s in %s", firstName, lastName, race), rsDriver);
+                            }
+                        }
+                        else {
+                            // Case 7: user provided both race and constructor. Show race results for this constructor
+                            //          in this Grand Prix over the years. Order by year DESC.
+                            if (driver.equals("--")) {
+                                ResultSet rsConstructor = runProcedure(race, constructor, "check_race_c_race_constructor(?, ?)");
+                                setUpResults(String.format("All Race Results for %s in %s", constructor, race), rsConstructor);
+                            }
+                            // Case 8: user provided race, constructor, and driver. Conflict.
+                            else {
+                                labelWarning.setText("Error! Cannot select both constructor and driver when checking Race results");
+                            }
+                        }
+                    }
+                }
+                else {
+                    if (race.equals("--")) {
+                        if (constructor.equals("--")) {
+                            // Case 9: user provided season. Show all race results of all races in this season for both
+                            //          constructors and drivers. Also show end of season constructor and driver
+                            //          standings.
+                            if (driver.equals("--")) {
+                                ResultSet rsDriver = runProcedure(season, "check_race_d_season(?)");
+                                setUpResults(String.format("All Driver Race Results in %s", season), rsDriver);
+                                ResultSet rsDriverStanding = runProcedure(season, "check_driver_standing_season(?)");
+                                setUpResults(String.format("Driver Standings by the end of %s", season), rsDriverStanding);
+                                ResultSet rsConstructor = runProcedure(season, "check_race_c_season(?)");
+                                setUpResults(String.format("All Constructor Race Results in %s", season), rsConstructor);
+                                ResultSet rsConstructorStanding = runProcedure(season, "check_constructor_standing_season(?)");
+                                setUpResults(String.format("Constructor Standings by the end of %s", season), rsConstructorStanding);
+                            }
+                            // Case 10: user provided season and driver. Show all race results in all races in this
+                            //          season for this driver. Order by race round.
+                            else {
+                                String[] nameParts = driver.split(",");
+                                String lastName = nameParts[0].trim();
+                                String firstName = nameParts[1].trim();
+                                ResultSet rsDriver = runProcedure(season, firstName, lastName, "check_race_d_season_driver(?, ?, ?)");
+                                setUpResults(String.format("Driver Results for %s %s in %s", firstName, lastName, season), rsDriver);
+                            }
+                        }
+                        else {
+                            // Case 11: user provided season and constructor. Show all race results for this constructor
+                            //          in this season. Include results for the drivers driving for this constructor.
+                            //          Order by race rounds.
+                            if (driver.equals("--")) {
+                                ResultSet rsConstructor = runProcedure(season, constructor, "check_race_c_season_constructor(?, ?)");
+                                setUpResults(String.format("Race Results for %s in %s", constructor, season), rsConstructor);
+                                ResultSet rsDriver = runProcedure(season, constructor, "check_race_c_season_constructor_breakdown(?, ?)");
+                                setUpResults(String.format("Race Results for Drivers Driving for %s in %s", constructor, season), rsDriver);
+                            }
+                            // Case 12: user provided season, constructor, and driver. Conflict.
+                            else {
+                                labelWarning.setText("Error! Cannot select both constructor and driver when checking Race results");
+                            }
+                        }
+                    }
+                    else {
+                        if (constructor.equals("--")) {
+                            // Case 13: user provided season and race. Show race results for all drivers and
+                            //          constructors in this race. Order by race final orders.
+                            if (driver.equals("--")) {
+                                ResultSet rsDriver = runProcedure(season, race, "check_race_d_season_race(?, ?)");
+                                setUpResults(String.format("Driver Race Results in %s %s", season, race), rsDriver);
+                                ResultSet rsConstructor = runProcedure(season, race, "check_race_c_season_race(?, ?)");
+                                setUpResults(String.format("Constructor Race Results in %s %s", season, race), rsConstructor);
+                            }
+                            // Case 14: user provided season, race, and driver. Show race result for this driver in this
+                            //          specific Grand Prix in this year.
+                            else {
+                                String[] nameParts = driver.split(",");
+                                String lastName = nameParts[0].trim();
+                                String firstName = nameParts[1].trim();
+                                ResultSet rsDriver = runProcedure(season, race, firstName, lastName, "check_race_d_season_race_driver(?, ?, ?, ?)");
+                                setUpResults(String.format("Race Result for %s %s in %s %s", firstName, lastName, season, race), rsDriver);
+                            }
+                        }
+                        else {
+                            // Case 15: user provided season, race, and constructor. Show race results for this
+                            //          constructor in this Grand PRix in this year. Also show the race results for
+                            //          drivers driving for this constructor.
+                            if (driver.equals("--")) {
+                                ResultSet rsConstructor = runProcedure(season, race, constructor, "check_race_c_season_race_constructor(?, ?, ?)");
+                                setUpResults(String.format("Race Result for %s in %s %s", constructor, season, race), rsConstructor);
+                                ResultSet rsDriver = runProcedure(season, race, constructor, "check_race_c_season_race_constructor_breakdown(?, ?, ?)");
+                                setUpResults(String.format("Race Result for Drivers Driving for %s in %s %s", constructor, season, race), rsDriver);
+                            }
+                            // Case 16: user provided season, race, constructor, and driver. Conflict.
+                            else {
+                                labelWarning.setText("Error! Cannot select both constructor and driver when checking Race results");
+                            }
+                        }
+                    }
+                }
+
+                // Repaint the panelResults to update it with the corresponding result tables.
+                panelResults.revalidate();
+                panelResults.repaint();
+            }
+        });
+
+        buttonLapTime.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
             }
         });
@@ -376,24 +538,25 @@ public class MainPage extends JFrame {
 
             // Create a JScrollPane and add the table to it.
             JScrollPane scrollPaneTable = new JScrollPane(table);
-            scrollPaneTable.setBorder(BorderFactory.createMatteBorder(0, 0, 20, 0, Color.WHITE));
+            scrollPaneTable.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE));
 
-            // Add the table title and the tableScrollPane to the panelResults JPanel.
-            JTextPane textPaneTableTitle = new JTextPane();
-            textPaneTableTitle.setText(tableTitle);
-            // Format the table title pane to font size 18.
-            SimpleAttributeSet attributeSet = new SimpleAttributeSet();
-            StyleConstants.setFontSize(attributeSet, 18);
-            textPaneTableTitle.getStyledDocument().setCharacterAttributes(0, textPaneTableTitle.getDocument().getLength(), attributeSet, false);
-            // Add title.
-            textPaneTableTitle.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
-            textPaneTableTitle.setMinimumSize(new Dimension(Integer.MIN_VALUE, 40));
-            textPaneTableTitle.setPreferredSize(new Dimension(Integer.MIN_VALUE, 40));
-            textPaneTableTitle.setEditable(false);
-            this.panelResults.add(textPaneTableTitle);
-            // Add table scroll pane
-            this.panelResults.add(scrollPaneTable);
-
+            // Add the table title and the tableScrollPane to the panelResults JPanel if table has data.
+            if (table.getRowCount() > 0) {
+                JTextPane textPaneTableTitle = new JTextPane();
+                textPaneTableTitle.setText(tableTitle);
+                // Format the table title pane to font size 18.
+                SimpleAttributeSet attributeSet = new SimpleAttributeSet();
+                StyleConstants.setFontSize(attributeSet, 18);
+                textPaneTableTitle.getStyledDocument().setCharacterAttributes(0, textPaneTableTitle.getDocument().getLength(), attributeSet, false);
+                // Add title.
+                textPaneTableTitle.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+                textPaneTableTitle.setMinimumSize(new Dimension(Integer.MIN_VALUE, 40));
+                textPaneTableTitle.setPreferredSize(new Dimension(Integer.MIN_VALUE, 40));
+                textPaneTableTitle.setEditable(false);
+                this.panelResults.add(textPaneTableTitle);
+                // Add table scroll pane
+                this.panelResults.add(scrollPaneTable);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

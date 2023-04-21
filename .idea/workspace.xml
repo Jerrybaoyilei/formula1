@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8f95a5a-1c75-4288-8316-a205e3be4a59" name="Changes" comment="Set up the Database login window. Upon successful login with MySQL username and password, it will close the DB Login window and open F1LoginSignup window.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MainPage.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MainPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/test.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="e8f95a5a-1c75-4288-8316-a205e3be4a59" name="Changes" comment="Finished up user sign up and log in window. &#10;Built up the main window.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DBLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DBLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/F1LoginSignup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/F1LoginSignup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MainPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainPage.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +73,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681863979927</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Finished up user sign up and log in window. &#10;Built up the main window.">
+      <created>1682039528952</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682039528952</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -100,7 +99,8 @@
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
     <MESSAGE value="Set up the Database login window. Upon successful login with MySQL username and password, it will close the DB Login window and open F1LoginSignup window." />
-    <option name="LAST_COMMIT_MESSAGE" value="Set up the Database login window. Upon successful login with MySQL username and password, it will close the DB Login window and open F1LoginSignup window." />
+    <MESSAGE value="Finished up user sign up and log in window. &#10;Built up the main window." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished up user sign up and log in window. &#10;Built up the main window." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

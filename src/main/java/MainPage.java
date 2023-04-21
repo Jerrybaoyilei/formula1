@@ -8,11 +8,17 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.*;
 
 public class MainPage extends JFrame {
+
     private Connection connection;
     private String email;
+    private String URL_LINK = "https://docs.google.com/document/d/1jM8JdQNveXrcXTaDVXYF9DJnFVK5ngVfO4Fj_-5WrxU/edit?usp=sharing";
+
     private JPanel panelMain;
     private JPanel panelSelectors;
     private JPanel panelCheckButtons;
@@ -59,7 +65,7 @@ public class MainPage extends JFrame {
         this.panelResults.setLayout(new BoxLayout(panelResults, BoxLayout.Y_AXIS));
 
         // Set up ActionListeners for four check buttons.
-        this.setUpCheckButtons();
+        this.setUpButtons();
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -129,8 +135,10 @@ public class MainPage extends JFrame {
 
     }
 
-
-    public void setUpCheckButtons() {
+    /**
+     * Set up the button functions for checking results.
+     */
+    public void setUpButtons() {
 
         // Set up "Qualifying" button.
         buttonQualifying.addActionListener(new ActionListener() {
@@ -396,6 +404,7 @@ public class MainPage extends JFrame {
             }
         });
 
+        // Set up "Lap Time" button.
         buttonLapTime.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -462,6 +471,7 @@ public class MainPage extends JFrame {
             }
         });
 
+        // Set up "Pit Stop" button.
         buttonPitStop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -527,6 +537,37 @@ public class MainPage extends JFrame {
                 panelResults.repaint();
             }
         });
+
+        // Set up "Favorite Driver" button.
+        buttonFavDriver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FavDriver(connection, email);
+            }
+        });
+
+        // Set up "Favorite Constructors" button.
+        buttonFavConstructor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FavConstructor(connection, email);
+            }
+        });
+
+        // Set up "Not Familiar" button.
+        buttonInfo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI(URL_LINK));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                } catch (URISyntaxException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
     }
 
     /**
@@ -664,13 +705,7 @@ public class MainPage extends JFrame {
             }
 
             // Create JTable with the table model.
-            JTable table = new JTable(defaultTableModel) {
-                @Override
-                public void changeSelection(int row, int column, boolean toggle, boolean extend) {
-                    super.changeSelection(row, column, toggle, extend);
-                    scrollRectToVisible(getCellRect(row, 0, true));
-                }
-            };
+            JTable table = new JTable(defaultTableModel);
 
             // Create a JScrollPane and add the table to it.
             JScrollPane scrollPaneTable = new JScrollPane(table);
@@ -758,10 +793,10 @@ public class MainPage extends JFrame {
         panelFavButtons.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
         panelMain.add(panelFavButtons, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         buttonFavConstructor = new JButton();
-        buttonFavConstructor.setText("Favorite Constructor");
+        buttonFavConstructor.setText("Favorite Constructors");
         panelFavButtons.add(buttonFavConstructor, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         buttonFavDriver = new JButton();
-        buttonFavDriver.setText("Favorite Driver");
+        buttonFavDriver.setText("Favorite Drivers");
         panelFavButtons.add(buttonFavDriver, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         buttonInfo = new JButton();
         buttonInfo.setText("Not familiar with Formula 1? Check this out!");

@@ -149,7 +149,6 @@ public class F1LoginSignup extends JFrame {
                 int success = stmt.getInt(3);
                 if (success == 1) {
                     message.setText("Sign up successful");
-                    Thread.sleep(1000);
                     new MainPage(connection, email);
                     this.dispose();
                 }
@@ -161,8 +160,6 @@ public class F1LoginSignup extends JFrame {
                 else {
                     e.printStackTrace();
                 }
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
             }
         }
     };
@@ -175,9 +172,11 @@ public class F1LoginSignup extends JFrame {
         String email = fieldEmail.getText().trim();
         String password = new String(fieldPassword.getPassword());
         CallableStatement stmt = connection.prepareCall("{CALL log_in(?, ?, ?)}");
+        stmt.registerOutParameter(3, Types.VARCHAR);
         stmt.setString(1, email);
         stmt.setString(2, password);
-        stmt.registerOutParameter(3, Types.VARCHAR);
+
+
         stmt.execute();
         String outcome = stmt.getString(3);
         // Error in sign in.
@@ -187,11 +186,6 @@ public class F1LoginSignup extends JFrame {
         // Sign in successful.
         else {
             message.setText(outcome);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
             new MainPage(connection, email);
             this.dispose();
         }

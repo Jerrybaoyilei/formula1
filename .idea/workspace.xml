@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8f95a5a-1c75-4288-8316-a205e3be4a59" name="Changes" comment="Added buttons to invoke the &quot;favorite driver&quot; and &quot;favorite constructor&quot; windows.">
+    <list default="true" id="e8f95a5a-1c75-4288-8316-a205e3be4a59" name="Changes" comment="Fixed some MySQL procedures for time conversion from milliseconds to hour:minute:seconds:milliseconds.&#10;Added procedures related to sprint races and put them in qualifying checker's button action.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/FavConstructor.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/FavConstructor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/FavDriver.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/FavDriver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DBLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Formula1DataChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/F1LoginSignup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/F1LoginSignup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MainPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainPage.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,12 +48,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "false",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "223",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="DBLogin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DBLogin" />
+    <configuration name="Formula1DataChecker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Formula1DataChecker" />
       <module name="formula1.main" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -53,7 +64,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DBLogin" />
+        <item itemvalue="Application.Formula1DataChecker" />
       </list>
     </recent_temporary>
   </component>
@@ -108,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682085383506</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fixed some MySQL procedures for time conversion from milliseconds to hour:minute:seconds:milliseconds.&#10;Added procedures related to sprint races and put them in qualifying checker's button action.">
+      <created>1682091231032</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682091231032</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -132,7 +150,18 @@
     <MESSAGE value="Covered all scenarios for checking race results." />
     <MESSAGE value="Covered all scenarios for checking Lap Times and Pit Stops." />
     <MESSAGE value="Added buttons to invoke the &quot;favorite driver&quot; and &quot;favorite constructor&quot; windows." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added buttons to invoke the &quot;favorite driver&quot; and &quot;favorite constructor&quot; windows." />
+    <MESSAGE value="Fixed some MySQL procedures for time conversion from milliseconds to hour:minute:seconds:milliseconds.&#10;Added procedures related to sprint races and put them in qualifying checker's button action." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed some MySQL procedures for time conversion from milliseconds to hour:minute:seconds:milliseconds.&#10;Added procedures related to sprint races and put them in qualifying checker's button action." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

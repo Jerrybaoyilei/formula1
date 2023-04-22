@@ -170,7 +170,7 @@ public class MainPage extends JFrame {
                             String firstName = nameParts[1].trim();
                             ResultSet resultSet = runProcedure(firstName, lastName, "check_qualifying_driver(?, ?)");
                             setUpResults(String.format("Qualifying Results for %s", firstName + " " + lastName), resultSet);
-                            ResultSet rs = runProcedure(firstName, lastName, "check_sprint_driver(?, ?");
+                            ResultSet rs = runProcedure(firstName, lastName, "check_sprint_driver(?, ?)");
                             setUpResults(String.format("Sprint Results for %s", firstName + " " + lastName), rs);
                         }
                     } else {
@@ -713,6 +713,7 @@ public class MainPage extends JFrame {
 
             // Add the table title and the tableScrollPane to the panelResults JPanel if table has data.
             if (table.getRowCount() > 0) {
+                labelWarning.setText("Related data successfully obtained");
                 JTextPane textPaneTableTitle = new JTextPane();
                 textPaneTableTitle.setText(tableTitle);
                 // Format the table title pane to font size 18.
@@ -727,6 +728,9 @@ public class MainPage extends JFrame {
                 this.panelResults.add(textPaneTableTitle);
                 // Add table scroll pane
                 this.panelResults.add(scrollPaneTable);
+            }
+            else {
+                labelWarning.setText("No data for this combination");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
